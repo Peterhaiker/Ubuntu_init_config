@@ -86,6 +86,13 @@ sudo cp ./sources.list /etc/apt/
 sudo apt-get update>/dev/null
 
 #install sogou input 
+sudo add-apt-repository ppa:fcitx-team/nightly
+sudo apt-get install fcitx -y>/dev/null
+sudo apt-get install fcitx-config-gtk -y>/dev/null
+sudo apt-get install fcitx-table-all -y>/dev/null
+sudo apt-get install im-switch -y >/dev/null
+#待完成
+#根据系统位数选择安装32或64的输入法
 sudo apt-get install sogoupinyin -y>/dev/null
 if (($? == 0));then
     echo "\033[032minstall sogoupinyin success\033[0m"

@@ -16,5 +16,7 @@ cd Ubuntu_init_config
 chmod u+x init.sh
 ./init.sh
 ```
+一切完成后最好重启一下，目前在输入法安装那边做的不是很完美，可能无法安装  
+
 #### 错误查看  
 若发生错误，会在Ubuntu_init_config目录下创建一个myinit.log文件用于保存错误信息，查看一下就指导错在哪一步，然后只能由您手动完成那个安装了
