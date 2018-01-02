@@ -3,7 +3,7 @@
 function remove_package()
 {
 echo -e "\033[032mremove useless package...\033[0m"
-sudo apt-get remove libreoffice-common unity-webapps-common  thunderbird totem rhythmbox empathy brasero simple-scan gnome-mahjonggonboard deja-dup -y>/dev/null 
+sudo apt-get remove libreoffice-common unity-webapps-common  thunderbird totem rhythmbox empathy brasero simple-scan deja-dup -y
 #if the previous command run error,then error message output to log file
 err=$?
 if (( $err != 0 ));then
@@ -18,7 +18,7 @@ fi
 function install_config_vim()
 {
 echo -e "\033[032madd vim ppa and install vim...\033[0m"
-sudo add-apt-repository ppa:jonathonf/vim>/dev/null&&sudo apt-get update -y>/dev/null&&sudo apt-get install vim -y>/dev/null
+sudo add-apt-repository ppa:jonathonf/vim&&sudo apt-get update -y&&sudo apt-get install vim
 err=$?
 if (($err != 0));then
     echo "install vim failed,return value:$err2"2>>myinit.log
@@ -29,7 +29,16 @@ fi
 #configure vim
 echo -e "\033[032mconfigure vim...\033[0m"
 #step 1
-sudo apt-get install vim-gtk exuberant-ctags -y>/dev/null&&rm -rf ~/.vim ~/.vimrc&&git clone https://github.com/ruchee/vimrc.git ~/vimrc&&mv ~/vimrc/vimfiles ~/.vim&&mv ~/vimrc/_vimrc ~/.vimrc&&wget https://github.com/todylu/monaco.ttf/blob/master/monaco.ttf?raw=true>/dv/null&&mv monaco.ttf ~/.fonts
+sudo apt-get install vim-gtk exuberant-ctags -y
+rm -rf ~/.vim ~/.vimrc
+git clone https://github.com/ruchee/vimrc.git ~/vimrc
+mv ~/vimrc/vimfiles ~/.vim
+mv ~/vimrc/_vimrc ~/.vimrc
+wget https://github.com/todylu/monaco.ttf/blob/master/monaco.ttf?raw=true>/dev/null
+mv monaco.ttf ~/.fonts
+git clone git://github.com/aperezdc/vim-template.git
+echo -e "\033[032myou should config the vim-template in dir ~/.vim/bundle/vim-template/plugin/[0m"
+
 if (($? != 0));then
     echo "config vim failed"2>>myinit.log
 else
@@ -41,7 +50,7 @@ fi
 function install_git_vpnc()
 {
 echo -e "\033[032minstall vpnc and git...\033[0m"
-sudo apt-get install vpnc git -y>/dev/null
+sudo apt-get install vpnc git -y
 err=$?
 if (($err != 0));then
     echo "install vpnc or git failed,return value:$err"2>>myinit.log
@@ -53,7 +62,7 @@ fi
 #换源
 function change_source()
 {
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.cpy&&sudo cp ./sources.list /etc/apt/&&sudo apt-get update>/dev/null
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.cpy&&sudo cp ./sources.list /etc/apt/&&sudo apt-get update
 if (($err != 0));then
     echo "换源失败"2>>myinit.log
 else
@@ -65,13 +74,13 @@ fi
 function install_sogou_input()
 {
 sudo add-apt-repository ppa:fcitx-team/nightly
-sudo apt-get install fcitx -y>/dev/null
-sudo apt-get install fcitx-config-gtk -y>/dev/null
-sudo apt-get install fcitx-table-all -y>/dev/null
-sudo apt-get install im-switch -y >/dev/null
+sudo apt-get install fcitx -y
+sudo apt-get install fcitx-config-gtk -y
+sudo apt-get install fcitx-table-all -y
+sudo apt-get install im-switch -y 
 #待完成
 #根据系统位数选择安装32或64的输入法
-sudo apt-get install sogoupinyin -y>/dev/null
+sudo apt-get install sogoupinyin -y
 if (($? == 0));then
     echo "\033[032minstall sogoupinyin success\033[0m"
 else
@@ -97,8 +106,8 @@ function install_all(){
     install_config_vim
     install_sogou_input
     install_chromiun
-sudo apt-get autoremove -y>/dev/null
-sudo apt-get upgrade -y>/dev/null
+sudo apt-get autoremove -y
+sudo apt-get upgrade -y
 echo "\033[032mCongratulation,all step finished,maybe some wrong happened if myinit.log file you see in the directory\033[0m"
 }
 
